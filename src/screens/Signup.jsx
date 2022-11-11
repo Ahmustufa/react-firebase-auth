@@ -10,7 +10,6 @@ function Login() {
     password: "",
   });
   const [message, setMessage] = useState("");
-  const [state, setState] = useState(false);
   const [field, setField] = useState(true);
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -22,7 +21,6 @@ function Login() {
       if (user.email.length > 10) {
         if (user.password.length > 5) {
           register(user.email, user.password);
-          setState(false);
         } else {
           setMessage("Password should have atleast 6 characters");
         }
@@ -30,7 +28,6 @@ function Login() {
         setMessage("incorrect email format");
       }
     } else {
-      setState(true);
       setMessage("The fields cannot be empty");
       console.log("enter value");
     }
@@ -66,6 +63,7 @@ function Login() {
             <TextField
               required
               error={field}
+              helperText={message}
               type="password"
               label="Password"
               name="password"
@@ -74,7 +72,7 @@ function Login() {
             <Button variant="contained" onClick={handleSubmit}>
               Submit
             </Button>
-            {state ? <p>{message}</p> : ""}
+            {/* {state ? <p>{message}</p> : ""} */}
           </Stack>
         </Grid>
       </Grid>
